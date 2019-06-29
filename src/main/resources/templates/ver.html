@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<div th:if="${#lists.isEmpty(distrito.calles)}"
+					class="alert alert-info my-4"
+					th:text="'No hay calles sucias en ' + ${distrito.nombre}"></div>
+
+				<table th:if="${not #lists.isEmpty(distrito.calles)}"
+					class="table table-bordered table-striped my-4">
+					<thead class="thead-dark">
+						<tr>
+							<th>folio</th>
+							<th>nombre</th>
+							<th>fecha</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="calle: ${distrito.calles}">
+							<td th:text="${calle.id}"></td>
+							<td th:text="${calle.nombre}"></td>
+							<td th:text="${calle.createAt}"></td>
+						</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
